@@ -1,0 +1,191 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="description" content="This is an appointment website for students to contact experts in Science.">
+	<meta name="Keywords" content="Science, Appointment, Scientists">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>My Account-Profile</title>
+
+	<!--Bootstrap-->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+	<link rel="stylesheet" href="../css/style.css">
+
+</head>
+
+<body>
+	<div class="container-fluid">
+		<header>
+			<!--Contact Info-->
+			<div class="contact">
+				<div class="alert alert-info alert-warning alert-dismissible fade show" role="alert" style="margin: 0;">
+					<span>Phone: <strong>+00 000 000 000 </strong>|</span>
+					<span>Eamil: <a href="mailto:DeadlyScience@gmail.com?subject=feedback"
+							class="alert-link">DeadlyScience@gmail.com</a></span>
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+			</div>
+
+			<!--Menu Bar-->
+			<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+				<!--Logo-->
+				<a class="navbar-brand" href="index.html">
+					<img src="../images/logo.png" alt="Deadly Science Logo" height="60px">
+				</a>
+
+				<!--Catalog-->
+				<button class="navbar-toggler" type="button" data-toggle="collapse"
+					data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item active">
+							<a class="nav-link" href="index.html">Home<span class="sr-only">(current)</span></a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="manageApp-current.html">Manage Appointments</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="about.html">About</a>
+						</li>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="account-profile.html" id="navbarDropdown"
+								role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								My Account
+							</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+								<a class="dropdown-item" href="account-profile.html">Profile</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="account-pw.html">Change Password</a>
+							</div>
+						</li>
+					</ul>
+
+					<!--Right-->
+					<div>
+						<span>
+							<a href="https://twitter.com/DeadlyScience" target="_blank">
+								<button class="btn btn-outline-light my-2 my-sm-0" type="button">Follow Us</button>
+							</a>
+						</span>
+						<span><a href="#" target="_blank"><img src="../images/twitterLogo.png" alt="Twitter Logo"
+									height="40px"></a></span>
+					</div>
+				</div>
+			</nav>
+
+			<!--Company image-->
+			<div class="company-image">
+				<img src="../images/Cpmpany-1200x400.jpeg" class="img-fluid" alt="Deadly Science"
+					title="Welcome to Deadly Science">
+			</div>
+		</header>
+
+
+		<main style="margin:0 20px;">
+			<!--Page location-->
+			<div class="page-nav-all">
+				<div class="page-nav">
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="index.html">Home</a></li>
+							<li class="breadcrumb-item active" aria-current="page">My Account</li>
+						</ol>
+					</nav>
+				</div>
+
+				<div class="card-header">
+					<ul class="nav nav-tabs card-header-tabs">
+						<li class="nav-item">
+							<a class="nav-link active" href="account-profile.html">Profile</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="account-pw.html">Change Password</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<!--Profile info-->
+			<div class="container" style="width: 800px;">
+				<form class="needs-validation" novalidate>
+					<!--profile image-->
+					<div class="profile-img" style="text-align: center; margin:20px;">
+						<div>
+							<img src="../images/profile-demo.png" alt="">
+						</div>
+
+						<div class="custom-file" style="width:40%">
+							<input type="file" class="custom-file-input" id="profile-img-upload">
+							<label class="custom-file-label" for="profile-img-upload">Upload photo</label>
+						</div>
+
+					</div>
+
+					<!--Row 1-->
+					<div class="form-row">
+						<div class="form-group col">
+							<label for="validationCustom01">First Name</label>
+							<input type="text" class="form-control" id="validationCustom01" placeholder="First Name">
+						</div>
+						<div class="form-group col">
+							<label for="validationCustom02">Last Name</label>
+							<input type="text" class="form-control" id="validationCustom02" placeholder="Last Name">
+						</div>
+					</div>
+
+					<!--Row 2-->
+					<div class="form-row">
+						<div class="form-group col">
+							<label for="inputEmail4">Email</label>
+							<input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+						</div>
+
+						<div class="form-group col">
+							<label for="inputState">Gender</label>
+							<select id="inputGender" class="form-control">
+								<option selected>Choose...</option>
+								<option>Male</option>
+								<option>Female</option>
+								<option>I'd rather not say.</option>
+							</select>
+						</div>
+					</div>
+
+					<!--Row 3-->
+					<div class="form-group">
+						<label for="inputOrgnization">Organisation</label>
+						<input type="text" class="form-control" id="inputOrgnization" placeholder="Organization">
+					</div>
+
+					<div style="text-align: center;">
+						<button type="submit" class="btn btn-primary">Sign in</button>
+					</div>
+
+				</form>
+			</div>
+		</main>
+	</div>
+
+
+	<!--Bootstrap-->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+</body>
+
+</html>

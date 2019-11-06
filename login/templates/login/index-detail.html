@@ -1,0 +1,393 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="description" content="This is an appointment website for students to contact experts in Science.">
+	<meta name="Keywords" content="Science, Appointment, Scientists">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Deadly Science - connecting students with scientists</title>
+
+	<!--Bootstrap-->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+	<link rel="stylesheet" href="../css/style.css">
+
+	<style type="text/css">
+		#company-image {
+			text-align: center;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container-fluid">
+		<header>
+			<!--Contact Info-->
+			<div class="contact">
+				<div class="alert alert-info alert-warning alert-dismissible fade show" role="alert" style="margin: 0;">
+					<span>Phone: <strong>+00 000 000 000 </strong>|</span>
+					<span>Eamil: <a href="mailto:DeadlyScience@gmail.com?subject=feedback"
+							class="alert-link">DeadlyScience@gmail.com</a></span>
+                    <span>Current User: {{ request.session.user_name }} </span>
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+			</div>
+
+			<!--Menu Bar-->
+			<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+				<!--Logo-->
+				<a class="navbar-brand" href="{% url 'home'%}">
+					<img src="../images/logo.png" alt="Deadly Science Logo" height="60px">
+				</a>
+
+				<!--Catalog-->
+				<button class="navbar-toggler" type="button" data-toggle="collapse"
+					data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item active">
+							<a class="nav-link" href="{% url 'home'%}">Home<span class="sr-only">(current)</span></a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{% url 'manageApp-current'%}">Manage Appointments</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{% url 'about'%}">About</a>
+						</li>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="{% url 'account-profile'%}" id="navbarDropdown"
+								role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								My Account
+							</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+								<a class="dropdown-item" href="{% url 'account-profile'%}">Profile</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="{% url 'account-pw'%}">Change Password</a>
+							</div>
+						</li>
+					</ul>
+
+					<!--Right-->
+					<div>
+						<span>
+                            <button class="btn btn-outline-light my-2 my-sm-0" type="button" data-toggle="modal"
+								data-target="#loginModal" onclick="a()">Log out</button>
+
+							<button class="btn btn-outline-light my-2 my-sm-0" type="button" data-toggle="modal"
+								data-target="#loginModal"
+								onclick="document.getElementById('id02').style.display='block'">Sign Up</button>
+						</span>
+						<span>
+							<button class="btn btn-outline-light my-2 my-sm-0" type="button"
+								onclick="document.getElementById('id01').style.display='block'">Log In</button>
+						</span>
+						<span>
+							<a href="https://twitter.com/DeadlyScience" target="_blank">
+								<button class="btn btn-outline-light my-2 my-sm-0" type="button">Follow Us</button>
+							</a>
+						</span>
+						<span><a href="https://twitter.com/DeadlyScience" target="_blank"><img src="{% static 'images/twitterLogo.png' %}" alt="Twitter Logo" height="40px"></a>
+						</span>
+
+					</div>
+				</div>
+			</nav>
+
+			<!--Company image-->
+			<div id="company-image">
+				<img src="../images/Cpmpany-1200x400.jpeg" class="img-fluid" alt="Deadly Science"
+					title="Welcome to Deadly Science">
+			</div>
+		</header>
+
+		<!--Content-->
+		<main>
+			<!--Page location-->
+			<div class="page-nav-all">
+				<div class="page-nav">
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="{% url 'home'%}">Home</a></li>
+							<li class="breadcrumb-item active" aria-current="page">Detail Information</li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+
+			<div class="container-fluid">
+				<!--Main content-->
+				<div class="row justify-content-around">
+
+					<!--Detail info-->
+					<!--profile image-->
+					<div class="col-5">
+						<div class="text-center"><img src="../images/scientists/ANNA AKSAMIT.jpeg" class="rounded"
+								alt="ANNA AKSAMIT">
+						</div>
+
+						<dl class="row">
+							<dt class="col-sm-3">Name</dt>
+							<dd class="col-sm-9">Anna Aksamit</dd>
+
+							<dt class="col-sm-3">Title</dt>
+							<dd class="col-sm-9">Professor</dd>
+
+							<dt class="col-sm-3">Field</dt>
+							<dd class="col-sm-9">Mathematics</dd>
+
+							<dt class="col-sm-3">Location</dt>
+							<dd class="col-sm-9">Sydney, Australia</dd>
+
+							<dt class="col-sm-3">Organization</dt>
+							<dd class="col-sm-9">University of Sydney</dd>
+
+							<dt class="col-sm-3">Personal Statement</dt>
+							<dd class="col-sm-9">
+								<p>ajhsfdakfhbaofbajhgfhjfjyhgdada</p>
+							</dd>
+						</dl>
+					</div>
+
+
+					<!--Timetable-whole-->
+					<div class="col-7">
+						<!--Select date-->
+						<input type="date">
+
+						<!--Timetable-->
+						<table class="table table-sm table-hover">
+							<thead class="thead-dark">
+								<tr>
+									<th scope="col"></th>
+									<th scope="col">Sun</th>
+									<th scope="col">Mon</th>
+									<th scope="col">Tue</th>
+									<th scope="col">Wed</th>
+									<th scope="col">Thu</th>
+									<th scope="col">Fri</th>
+									<th scope="col">Sat</th>
+								</tr>
+							</thead>
+
+							<tbody>
+								<tr>
+									<th scope="row">9:00</th>
+									<td> </td>
+									<td> </td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<th scope="row">9:30</th>
+									<td> </td>
+									<td> </td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<th scope="row">10:00</th>
+									<td> </td>
+									<td> </td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<th scope="row">10:30</th>
+									<td> </td>
+									<td> </td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<th scope="row">11:00</th>
+									<td> </td>
+									<td> </td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<th scope="row">11:30</th>
+									<td> </td>
+									<td> </td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<th scope="row">12:00</th>
+									<td> </td>
+									<td> </td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<th scope="row">13:00</th>
+									<td> </td>
+									<td> </td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<th scope="row">13:30</th>
+									<td> </td>
+									<td> </td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<th scope="row">14:00</th>
+									<td> </td>
+									<td> </td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<th scope="row">14:30</th>
+									<td> </td>
+									<td> </td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<th scope="row">15:00</th>
+									<td> </td>
+									<td> </td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<th scope="row">15:30</th>
+									<td> </td>
+									<td> </td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<th scope="row">16:00</th>
+									<td> </td>
+									<td> </td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<th scope="row">16:30</th>
+									<td> </td>
+									<td> </td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<th scope="row">17:00</th>
+									<td> </td>
+									<td> </td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<th scope="row">17:30</th>
+									<td> </td>
+									<td> </td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<th scope="row">18:00</th>
+									<td> </td>
+									<td> </td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<th scope="row">18:30</th>
+									<td> </td>
+									<td> </td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+
+		</main>
+	</div>
+
+
+	<!--Bootstrap-->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+</body>
+
+</html>

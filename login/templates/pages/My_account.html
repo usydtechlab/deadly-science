@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+ {% load staticfiles %}
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>My account</title>
+<meta name="description" content="This is personal account page for scientists">
+<meta name="keywords" content="Scientists, account">
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link href="css/style.css" rel="stylesheet">
+</head>
+ <script>
+    function preview(file){
+        var prevDiv = document.getElementById('preview');
+        if (file.files && file.files[0]){
+            var reader = new FileReader();
+            reader.onload = function(evt){
+            // prevDiv.innerHTML = '<img width="100%" height="100%" id="qw_img" src="' + evt.target.result + '" />';
+            $('.preview').attr('src' , evt.target.result);
+        }
+             reader.readAsDataURL(file.files[0]);
+        }else{
+            // prevDiv.innerHTML = '<div class="img" style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src=\'' + file.value + '\'"></div>';
+          $('.preview').attr('src' , file.value);
+        }
+    }
+
+      function foo(){
+        if(confirm("Are you sure you want to update your personal information?")){
+            return true;
+        }
+        return false;
+        }
+
+
+ </script>
+
+<body>
+	<header>
+		
+		<div class="contact">
+			<div class="alert alert-info alert-dismissible fade show" role="alert" style="margin: 0;">
+				<span>Phone: <strong>+00 000 000 000 </strong>|</span>
+				<span>Eamil: <a href="mailto:DeadlyScience@gmail.com?subject=feedback"
+						class="alert-link">DeadlyScience@gmail.com</a></span>
+                <span>Current User: {{ request.session.user_name }} </span>
+                {% if not request.session.user_name == none %}
+                        {% if not unread_message.count == 0 %}
+                    <a href="{% url 'ManageApp_SCI'%}">
+                    <button class="btn btn-primary" type="button">
+                        New Messages <span class="badge">{{ unread_message.count }}</span>
+                        </button>
+                   </a>
+                        {% endif %}
+                    {% endif %}
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+		</div>
+
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			
+			<a class="navbar-brand" href="{% url 'home'%}">
+				<img src="{% static 'images/logo.png' %}" alt="Deadly Science Logo" height="60px">
+			</a>
+
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto">
+                    <li class="nav-item ">
+							<a class="nav-link" href="{% url 'ManageTime_SCI'%}">Home<span class="sr-only">(current)</span></a>
+						</li>
+					<li class="nav-item ">
+						<a class="nav-link" href="{% url 'ManageTime_SCI'%}">Manage Timetable<span class="sr-only">(current)</span></a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{% url 'ManageApp_SCI'%}">Manage Appointments</a>
+					</li>
+					
+					<li class="nav-item dropdown active">
+						<a class="nav-link dropdown-toggle" href="{% url 'My_account'%}" id="navbarDropdown"
+							role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							My Account
+						</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="{% url 'My_account'%}">Profile</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="{% url 'My_account_change_password'%}">Change Password</a>
+						</div>
+					</li>
+				</ul>
+
+				
+				<div>
+                   <span>
+                            {% if not request.session.user_name == none %}
+                             <a href="{% url 'logout'%}" class="btn btn-outline-light my-2 my-sm-0" >Log out</a>
+                            {% endif %}
+                             {% if request.session.user_name == none %}
+							<button class="btn btn-outline-light my-2 my-sm-0" type="button" data-toggle="modal"
+								data-target="#loginModal"
+								onclick="document.getElementById('id02').style.display='block'">Sign Up</button>
+                            {% endif %}
+						</span>
+						<span>
+                             {% if request.session.user_name == none %}
+							<button class="btn btn-outline-light my-2 my-sm-0" type="button"
+								onclick="document.getElementById('id01').style.display='block'">Log In</button>
+                            {% endif %}
+						</span>
+						<span>
+							<a href="https://twitter.com/DeadlyScience" target="_blank">
+								<button class="btn btn-outline-light my-2 my-sm-0" type="button">Follow Us</button>
+							</a>
+						</span>
+						<span><a href="https://twitter.com/DeadlyScience" target="_blank"><img src="{% static 'images/twitterLogo.png' %}" alt="Twitter Logo" height="40px"></a>
+						</span>
+				</div>
+			   </div>
+		</nav>
+
+			<div id="company-image">
+			<img src="{% static 'images/Cpmpany-1200x400.jpeg' %}" class="img-fluid" alt="Deadly Science"
+				title="Welcome to Deadly Science">
+		    </div>
+</header>
+
+
+	<main style="margin:0 20px;">
+		<!--Page location-->
+		<div class="page-nav-all">
+			<div class="page-nav">
+				<nav aria-label="breadcrumb">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="{% url 'ManageTime_SCI'%}">Home</a></li>
+						<li class="breadcrumb-item active" aria-current="page">My Account</li>
+					</ol>
+				</nav>
+			</div>
+
+			<div class="card-header">
+				<ul class="nav nav-tabs card-header-tabs">
+					<li class="nav-item">
+						<a class="nav-link active" href="{% url 'My_account'%}">Profile</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{% url 'My_account_change_password'%}">Change Password</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<!--Profile info-->
+		<div class="container" style="width: 800px;">
+            <form class="needs-validation" enctype="multipart/form-data" action="/index_sci_myaccount/" method="post">
+{#			<form class="needs-validation" novalidate>#}
+                {% csrf_token %}
+				<!--profile image-->
+                {% for i in current_user %}
+               <div class="profile-img" style="text-align: center; margin:20px;">
+
+						<div>
+
+                            <img src="{{i.img.url}}" style="width:150px" alt="fault"/>
+
+                            <img class="preview" style="width:150px;" src="<?=IMG_URL.$cost['img'].'_s.jpg';?>"><br><br>
+						</div>
+
+						<div class="custom-file" style="width:40%">
+
+							<input type="file" class="custom-file-input" name="img" onchange="preview(this)"/>
+
+							<label class="custom-file-label" for="img">Upload photo</label>
+						</div>
+
+					</div>
+
+				<!--Row 1-->
+				<div class="form-row">
+					<div class="form-group col">
+						<label for="firstname">First Name</label>
+
+						<input type="text" class="form-control" name="firstname" placeholder={{ i.firstname }}>
+
+					</div>
+					<div class="form-group col">
+						<label for="lastname">Last Name</label>
+						<input type="text" class="form-control" name="lastname" placeholder={{ i.lastname }}>
+					</div>
+				</div>
+
+				<div class="form-row">
+					<div class="form-group col">
+						<label for="email">Email</label>
+						<input type="email" class="form-control" name="email" placeholder={{ i.email }}>
+					</div>
+
+					<div class="form-group col">
+						<label for="id_gender">Gender</label>
+						<select name="gender" class="form-control">
+						    <option selected>{{ i.gender }}</option>
+							<option value="male">Male</option>
+							<option value="female">Female</option>
+							<option value="none">I'd rather not say.</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="form-row">
+									<div class="form-group col">
+										<label for="id_title">Title</label>
+										<select name="title" class="form-control">
+											<option selected="selected">{{ i.title }}</option>
+											<option value="assistant">Assistant</option>
+											<option value="associate professor">Associate Professor</option>
+											<option value="dr">Dr</option>
+											<option value="lecturer">Lecturer</option>
+											<option value="management">Management</option>
+											<option value="phd">Phd</option>
+											<option value="postdoc">Postdoc</option>
+											<option value="professor">Professor</option>
+											<option value="research assistant">Research Assistant</option>
+											<option value="researcher">Researcher</option>
+										</select>
+									</div>
+
+					<div class="form-group col">
+						                <label  for="id_field">Field</label>
+										<select name="field" class="form-control">
+											<option selected="selected">{{ i.field }}</option>
+											<option value="agricultural science">Agricultural Science</option>
+											<option value="anthropology">Anthropology</option>
+											<option value="biology">Biology</option>
+											<option value="computer science">Computer Science</option>
+											<option value="engineering">Engineering</option>
+											<option value="mathematics">Mathematics</option>
+											<option value="physics">Physics</option>
+											<option value="social science">Social Science</option>
+										</select>
+									</div>
+					</div>
+
+				<div class="form-row">
+					<div class="form-group col">
+						<label for="country">Country</label>
+						<input type="text" class="form-control" name="country" placeholder={{ i.country }}>
+					</div>
+
+					<div class="form-group col">
+						<label for="location">Location</label>
+						<input type="text" class="form-control" name="location" placeholder={{ i.location }}>
+					</div>
+				</div>
+				<!--Row 5-->
+				<div class="form-group">
+					<label for="organization">Organisation</label>
+					<input type="text" class="form-control" name="organization" placeholder={{ i.organization }}>
+				</div>
+
+				<div class="form-group">
+					<label for="statement">Personal Statement</label>
+					<input type="text" class="form-control" name="statement" placeholder={{ i.statement }}>
+				</div>
+                {% endfor %}
+
+
+				<div style="text-align: center;">
+					<button type="submit" onclick="return foo();" class="btn btn-primary">Update</button>
+				</div>
+			</form>
+		</div>
+	</main>
+
+	<!--Bootstrap-->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+</body>
+
+</html>

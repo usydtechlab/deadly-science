@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+ {% load staticfiles %}
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Appointments </title>
+<meta name="description" content="This is the page for scientists to view and manage their appointments">
+<meta name="keywords" content="scientists">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<link rel="stylesheet" href="../css/style.css">
+</head>
+  <script>
+      function foo(){
+        if(confirm("Are you sure you want to accept this appointment?")){
+            return true;
+        }
+        return false;
+        }
+       function foo1(){
+        if(confirm("Are you sure you want to reject this appointment?")){
+            return true;
+        }
+        return false;
+        }
+        function foo2(){
+        if(confirm("Are you sure you want to cancel this appointment?")){
+            return true;
+        }
+        return false;
+        }
+        function foo3(){
+        if(confirm("Are you sure this appointment is completed?")){
+            return true;
+        }
+        return false;
+        }
+        function foo4(){
+        if(confirm("Are you sure you want to delete this historical appointment?")){
+            return true;
+        }
+        return false;
+        }
+ </script>
+<body>
+    <header>
+
+	<div class="contact">
+				<div class="alert alert-info alert-dismissible fade show" role="alert" style="margin: 0;">
+					<span>Phone: <strong>+00 000 000 000 </strong>|</span>
+					<span>Eamil: <a href="mailto:DeadlyScience@gmail.com?subject=feedback"
+							class="alert-link">DeadlyScience@gmail.com</a></span>
+                    <span>Current User: {{ request.session.user_name }} </span>
+                    {% if not request.session.user_name == none %}
+                        {% if not unread_message.count == 0 %}
+                    <a href="{% url 'ManageApp_SCI'%}">
+                    <button class="btn btn-primary" type="button">
+                        New Messages <span class="badge">{{ unread_message.count }}</span>
+                        </button>
+                   </a>
+                        {% endif %}
+                    {% endif %}
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+	</div>
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+				<a class="navbar-brand" href="{% url 'home'%}">
+					<img src="{% static 'images/logo.png' %}" alt="Deadly Science Logo" height="60px">
+				</a>
+
+				<button class="navbar-toggler" type="button" data-toggle="collapse"
+					data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+	    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+							<a class="nav-link" href="{% url 'ManageTime_SCI'%}">Home<span class="sr-only">(current)</span></a>
+						</li>
+						<li class="nav-item ">
+							<a class="nav-link" href="{% url 'ManageTime_SCI'%}">Manage Timetable<span class="sr-only">(current)</span></a>
+						</li>
+						<li class="nav-item active">
+							<a class="nav-link" href="{% url 'ManageApp_SCI'%}">Manage Appointments</a>
+						</li>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="{% url 'My_account'%}" id="navbarDropdown"
+								role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								My Account
+							</a>
+
+							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+								<a class="dropdown-item" href="{% url 'My_account'%}">Profile</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="{% url 'My_account_change_password'%}">Change Password</a>
+							</div>
+
+						</li>
+					</ul>
+
+					<div>
+                        <span>
+                            {% if not request.session.user_name == none %}
+                             <a href="{% url 'logout'%}" class="btn btn-outline-light my-2 my-sm-0" >Log out</a>
+                            {% endif %}
+                             {% if request.session.user_name == none %}
+							<button class="btn btn-outline-light my-2 my-sm-0" type="button" data-toggle="modal"
+								data-target="#loginModal"
+								onclick="document.getElementById('id02').style.display='block'">Sign Up</button>
+                            {% endif %}
+						</span>
+						<span>
+                             {% if request.session.user_name == none %}
+							<button class="btn btn-outline-light my-2 my-sm-0" type="button"
+								onclick="document.getElementById('id01').style.display='block'">Log In</button>
+                            {% endif %}
+						</span>
+						<span>
+							<a href="https://twitter.com/DeadlyScience" target="_blank">
+								<button class="btn btn-outline-light my-2 my-sm-0" type="button">Follow Us</button>
+							</a>
+						</span>
+						<span><a href="https://twitter.com/DeadlyScience" target="_blank"><img src="{% static 'images/twitterLogo.png' %}" alt="Twitter Logo" height="40px"></a>
+						</span>
+					</div>
+	   </div>
+	</nav>
+
+			<div id="company-image">
+				<img src="{% static 'images/Cpmpany-1200x400.jpeg' %}" class="img-fluid" alt="Deadly Science"
+					title="Welcome to Deadly Science">
+			</div>
+
+
+</header>
+
+
+
+<main style="margin:0 20px;">
+
+    <div class="container-fluid" style="width: 1100px;">
+	<form class="needs-validation" novalidate>
+
+    <h1>Appointment Information</h1>
+	<div class="table-responsive">
+	<table class="table">
+
+	<h2>Current Appointments</h2>
+	<thead>
+      <tr>
+      <th scope="col">Date</th>
+      <th scope="col">Start Time</th>
+      <th scope="col">Duration</th>
+      <th scope="col">Method</th>
+      <th scope="col">Location/ID</th>
+      <th scope="col">Appointer name</th>
+      <th scope="col">Appointer email</th>
+      <th scope="col">Status</th>
+
+    </tr>
+  </thead>
+        {% for i in current %}
+		<tbody>
+			<tr>
+				<td>{{ i.date }}</td>
+				<td>{{ i.starttime }}</td>
+				<td>{{ i.duration }}</td>
+				<td>{{ i.method }}</td>
+				<td>{{ i.location_id }}</td>
+			    <td>{{ i.appointer_firstname }} {{ i.appointer_lastname }}</td>
+			    <td>{{ i.appointer_email }}</td>
+                <td>{{ i.status }}</td>
+                {% if i.status == 'unconfirmed' %}
+                    <td><a href="{% url 'confirm'  i.id  %}" onclick="return foo();" class="btn btn-primary" >Accept</a></td>
+                    <td><a href="{% url 'reject'  i.id  %}" onclick="return foo1();" class="btn btn-danger" >Reject</a></td>
+                {% elif i.status == 'confirmed' %}
+                    <td><a href="{% url 'cancel'  i.id  %}" onclick="return foo2();" class="btn btn-danger" >Cancel</a></td>
+                    <td><a href="{% url 'complete'  i.id  %}" onclick="return foo3();" class="btn btn-success" >Complete</a></td>
+                {% endif %}
+
+
+        {% endfor %}
+
+			</tr>
+
+
+		</tbody>
+	</table>
+</div>
+
+    <div class="table-responsive">
+	<table class=table>
+    <h2>History Appointments</h2>
+    <thead>
+      <tr>
+      <th scope="col">Date</th>
+      <th scope="col">Start Time</th>
+      <th scope="col">Duration</th>
+      <th scope="col">Method</th>
+      <th scope="col">Location/ID</th>
+      <th scope="col">Appointer name</th>
+      <th scope="col">Appointer email</th>
+      <th scope="col">Status</th>
+
+    </tr>
+  </thead>
+        {% for i in history %}
+		<tbody>
+			<tr>
+				<td>{{ i.date }}</td>
+				<td>{{ i.starttime }}</td>
+				<td>{{ i.duration }}</td>
+				<td>{{ i.method }}</td>
+				<td>{{ i.location_id }}</td>
+			    <td>{{ i.appointer_firstname }} {{ i.appointer_lastname }}</td>
+			    <td>{{ i.appointer_email }}</td>
+                <td>{{ i.status }}</td>
+                <td><a href="{% url 'delete_appointment'  i.id  %}" onclick="return foo4();" class="btn btn-danger" >Delete</a></td>
+
+        {% endfor %}
+			</tr>
+
+		</tbody>
+	</table>
+</div>
+</form>
+</div>
+
+</main>
+</body>
+</html>
