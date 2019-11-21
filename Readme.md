@@ -1,6 +1,6 @@
 ## CS-42-3 DeadlyScience
 
-This project is for the DeadlyScience Project which is aimmed at to set up a website where rural students can get in touch with scientists. 
+This project is for the DeadlyScience Project which is aimmed at to set up a website where rural students can get in touch with scientists. Because we didn't deploy this project to the cloud yet due to the limited time, so we use intranet penetration instead. If you need an external user test, please contact us by Slack or send an email to wanglundi@gmail.com, We will reply as soon as possible！
 
 #### Environment
 
