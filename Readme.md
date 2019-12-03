@@ -39,7 +39,7 @@ The majority functions is shown in figure above.
 ## Refactoring logs
 
 - [x] Archive original docs from Capstone team CP42-3
-- [x] Collect all the dependencies into `requirement.txt`
+- [x] Collect all the dependencies into `requirements.txt`
 - [x] Implement containerisation
 - [ ] Test app running in Docker container
 
