@@ -1,0 +1,32 @@
+version: '3.2'
+
+services:
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      - MYSQL_DATABASE=cs42
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_USER=5703
+      - MYSQL_PASSWORD=w2l8d3
+    ports:
+      - '3306:3306' # Opens port 3306 on the container
+    expose:
+      - '3306'
+    volumes:
+      - deadlysci-db:/var/lib/mysql
+    container_name: deadlysci-db
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
+    ports:
+      - "80:8000"  # map to HTTP 80
+    depends_on:
+      - db
+    container_name: deadlysci-web
+
+# Names the volume
+volumes:
+  deadlysci-db:

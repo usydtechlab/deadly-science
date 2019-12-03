@@ -34,3 +34,12 @@ scientist: email: 18877331313@163.com  password: 1234
 <img src="./Captone CS42 structure.png" alt="Captone CS42 structure" style="zoom:67%;" />
 
 The majority functions is shown in figure above.
+
+
+## Refactoring logs
+
+- [x] Archive original docs from Capstone team CP42-3
+- [x] Collect all the dependencies into `requirement.txt`
+- [x] Implement containerisation
+- [ ] Test app running in Docker container
+
