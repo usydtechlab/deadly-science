@@ -14,6 +14,7 @@ services:
     expose:
       - '3306'
     volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
       - deadlysci-db:/var/lib/mysql
     container_name: deadlysci-db
   web:

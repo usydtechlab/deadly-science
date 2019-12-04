@@ -43,3 +43,34 @@ The majority functions is shown in figure above.
 - [x] Implement containerisation
 - [ ] Test app running in Docker container
 
+
+
+## Create Database schema
+
+### Detect the model changes and make migrations
+
+```bash
+docker exec -it deadlysci-web python manage.py makemigrations
+```
+
+### Execute `migrate` to sync up database schema in MySQL
+
+```bash
+docker exec -it deadlysci-web python manage.py migrate
+```
+
+
+```bash
+docker exec -it deadlysci-web python manage.py createsuperuser
+```
+
+Admin page `superuser` login:
+
+```bash
+docker exec -it komprenu-web python manage.py createsuperuser
+Username (leave blank to use 'root'): techlab
+Email address: techlab@sydney.edu.au
+Password: ***
+Password (again): ***
+Superuser created successfully.
+```
