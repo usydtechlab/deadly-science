@@ -25,8 +25,6 @@ def hash_code(s, salt='mysite'):
 
 
 def index(request):
-
-
     if request.session.get('is_login', None):
         img = models.User.objects.filter(role='teacher')
         unread_message1=models.Appointment.objects.filter(student_id=request.session['user_id'])
@@ -38,12 +36,8 @@ def index(request):
         img = models.User.objects.filter(role='teacher')
         return render(request, 'pages/index_copy.html', {'img': img})
 
-
-
-
 def index_home(request):
     return render(request, 'pages/index_copy.html')
-
 
 def index_manageapp_current(request):
 

@@ -1,17 +1,11 @@
-@charset "UTF-8";
-/* CSS Document */
+
 * {
 	margin:0;
 	padding:0;
 	box-sizing: border-box;
 }
 
-/* .container-fluid{
-	width: 1200px;
-} */
-
 body {
-	height: 1500px;
 	font-size: 18px;
 }
 
