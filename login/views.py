@@ -54,7 +54,6 @@ def index_manageapp_current(request):
 
     return render(request, 'pages/manageApp-current.html', {'current': current,'unread_message': unread_message})
 
-
 def index_manageapp_history(request):
     from .models import Appointment
     unread_message1 = models.Appointment.objects.filter(student_id=request.session['user_id'])
