@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
- {% load staticfiles %}
+{% load staticfiles %}
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="description" content="This is an appointment website for students to contact experts in Science.">
@@ -19,104 +20,175 @@
 
 <body>
 	<div class="container-fluid">
-		<!--Header-->
-		<header>
-			<!--Contact Info-->
-			<div class="contact">
-				<div class="alert alert-info alert-dismissible fade show" role="alert" style="margin: 0;">
-					<span>Phone: <strong>+00 000 000 000 </strong>|</span>
-					<span>Email: <a href="mailto:DeadlyScience@gmail.com?subject=feedback"
-							class="alert-link">DeadlyScience@gmail.com</a></span>
-                    <span>Current User: {{ request.session.user_name }} </span>
-                    {% if not request.session.user_name == none %}
-                        {% if not unread_message.count == 0 %}
-                    <a href="{% url 'ManageApp_SCI'%}">
-                    <button class="btn btn-primary" type="button">
-                        New Messages <span class="badge">{{ unread_message.count }}</span>
-                        </button>
-                   </a>
-                        {% endif %}
-                    {% endif %}
-					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
+		    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+					<!--Logo-->
+					<a class="navbar-brand" href="{% url 'home'%}">
+						<img src="{% static 'images/logo.png' %}" alt="Deadly Science Logo" height="60px">
+					</a>
+		
+					<!--Navbar-->
+					<button class="navbar-toggler" type="button" data-toggle="collapse"
+						data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+						aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
 					</button>
-				</div>
-			</div>
-
-			<!--Menu Bar-->
-			<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-				<!--Logo-->
-				<a class="navbar-brand" href="{% url 'home'%}">
-					<img src="{% static 'images/logo.png' %}" alt="Deadly Science Logo" height="60px">
-				</a>
-
-				<!--Catalog-->
-				<button class="navbar-toggler" type="button" data-toggle="collapse"
-					data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-					aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-
-				<div class="collapse navbar-collapse" id="navbarSupportedContent">
-					<ul class="navbar-nav mr-auto">
-						<li class="nav-item">
-							<a class="nav-link" href="{% url 'home'%}">Home<span class="sr-only">(current)</span></a>
-						</li>
-						<li class="nav-item  active">
-							<a class="nav-link" href="{% url 'manageApp-current'%}">Manage Appointments</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="{% url 'about'%}">About</a>
-						</li>
-						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="{% url 'account-profile'%}" id="navbarDropdown"
-								role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								My Account
-							</a>
-							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-								<a class="dropdown-item" href="{% url 'account-profile'%}">Profile</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="{% url 'account-pw'%}">Change Password</a>
+		
+					<div class="collapse navbar-collapse" id="navbarSupportedContent">
+						<ul class="navbar-nav mr-auto">
+							<li class="nav-item">
+								<a class="nav-link" href="{% url 'home'%}">Home<span class="sr-only">(current)</span></a>
+							</li>
+							{% if not request.session.user_name == none %}
+							<li class="nav-item">
+								<a class="nav-link" href="{% url 'manageApp-current'%}">Manage Appointments</a>
+							</li>
+							{% endif %}
+							<li class="nav-item active">
+								<a class="nav-link" href="{% url 'about'%}">About</a>
+							</li>
+		
+							{% if not request.session.user_name == none %}
+							<li class="nav-item dropdown ">
+								<a class="nav-link dropdown-toggle" href="{% url 'account-profile'%}" id="navbarDropdown"
+									role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									My Account
+								</a>
+								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+									<a class="dropdown-item" href="{% url 'account-profile'%}">Profile</a>
+									<div class="dropdown-divider"></div>
+									<a class="dropdown-item" href="{% url 'account-pw'%}">Change Password</a>
+								</div>
+							</li>
+							{% endif %}
+		
+							<li class="nav-item">
+								<span>Current User: {{ request.session.user_name }} </span>
+								{% if not request.session.user_name == none %}
+									{% if not unread_message.count == 0 %}
+										<a href="{% url 'manageApp-current'%}">
+										<button class="btn btn-primary" type="button">
+											New Messages <span class="badge">{{ unread_message.count }}</span>
+											</button>
+										</a>
+									{% endif %}
+								{% endif %}
+							</li>
+						</ul>
+						<!--Right Buttons-->
+						<div>
+							<span>
+								{% if not request.session.user_name == none %}
+									<a href="{% url 'logout'%}" class="btn btn-outline-light my-2 my-sm-0" >Log out</a>
+								{% endif %}
+									{% if request.session.user_name == none %}
+								<button class="btn btn-outline-light my-2 my-sm-0" type="button" data-toggle="modal"
+									data-target="#loginModal"
+									onclick="document.getElementById('id02').style.display='block'">Sign Up</button>
+								{% endif %}
+							</span>
+							<span>
+									{% if request.session.user_name == none %}
+								<button class="btn btn-outline-light my-2 my-sm-0" type="button"
+									onclick="document.getElementById('id01').style.display='block'">Log In</button>
+								{% endif %}
+							</span>
+		
+							<!-- The Modal (contains the Sign Up form) -->
+							<div id="id02" class="modal-login">
+								<span onclick="document.getElementById('id02').style.display='none'" class="close"
+									title="Close Modal">&times;</span>
+								<form class="modal-content animate" action="/register/" method="post">
+									<div class="container">
+										{% csrf_token %}
+										<h3>Sign Up</h3>
+										<p>Please fill in this form to create an account.</p>
+										<hr>
+										<label for="username"><b>Email</b></label>
+										<input type="text" placeholder="Enter Email" name="username" required>
+		
+										<label for="password1"><b>Password</b></label>
+										<input type="password" placeholder="Enter Password" name="password1" required>
+		
+		
+										<label for="password2"><b>Repeat Password</b></label>
+										<input type="password" placeholder="Repeat Password" name="password2" required>
+		
+										<label for="id_role">Role:</label>
+										<select name="role" id="id_role">
+											<option value="student">Student</option>
+											<option value="teacher">Teacher</option>
+										</select>
+										<div class="clearfix">
+											<button type="submit" class="signup">Sign Up</button>
+											<button type="button"
+												onclick="document.getElementById('id02').style.display='none'"
+												class="cancelbtn btn-danger">Cancel</button>
+										</div>
+									</div>
+								</form>
 							</div>
-						</li>
-					</ul>
-
-					<!--Right-->
-					<div>
-                        <span>
-                            {% if not request.session.user_name == none %}
-                             <a href="{% url 'logout'%}" class="btn btn-outline-light my-2 my-sm-0" >Log out</a>
-                            {% endif %}
-                             {% if request.session.user_name == none %}
-							<button class="btn btn-outline-light my-2 my-sm-0" type="button" data-toggle="modal"
-								data-target="#loginModal"
-								onclick="document.getElementById('id02').style.display='block'">Sign Up</button>
-                            {% endif %}
-						</span>
-						<span>
-                             {% if request.session.user_name == none %}
-							<button class="btn btn-outline-light my-2 my-sm-0" type="button"
-								onclick="document.getElementById('id01').style.display='block'">Log In</button>
-                            {% endif %}
-						</span>
-						<span>
-							<a href="https://twitter.com/DeadlyScience" target="_blank">
-								<button class="btn btn-outline-light my-2 my-sm-0" type="button">Follow Us</button>
-							</a>
-						</span>
-						<span><a href="https://twitter.com/DeadlyScience" target="_blank"><img src="{% static 'images/twitterLogo.png' %}" alt="Twitter Logo" height="40px"></a>
-						</span>
-
+		
+							<!-- The Login Modal -->
+							<div id="id01" class="modal-login" style="width:100%;">
+								<span onclick="document.getElementById('id01').style.display='none'" class="close"
+									title="Close Modal">&times;</span>
+		
+								<!-- Modal Content -->
+								<form class="modal-content animate" action="/login/" method="post">
+									{% csrf_token %}
+									<div class="imgcontainer">
+										<img src="{% static 'images/profile-demo.png' %}" alt="profile photo" class="avatar">
+									</div>
+		
+									<div class="container">
+										<label for="username"><b>Username</b></label>
+										<input type="text" placeholder="Enter Username" name="username" required>
+		
+										<label for="password"><b>Password</b></label>
+										<input type="password" placeholder="Enter Password" name="password" required>
+		
+										<button type="submit">Login</button>
+		
+										<button type="button" onclick="document.getElementById('id01').style.display='none'"
+											class="cancelbtn">Cancel</button>
+		
+									</div>
+								</form>
+							</div>
+		
+							<!--Reset Password popup-->
+							<form action="">
+								<div class="modal fade" role="dialog" id="resetPw">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h3 class="modal-title">Reset Password</h3>
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+											</div>
+		
+											<div class="modal-body">
+												<div class="form-group">
+													<p>Enter your account's email address below and we will email you a link
+														to
+														reset your password with.</p>
+												</div>
+												<div class="form-group">
+													<input type="email" name="email" class="form-control"
+														placeholder="Email address">
+												</div>
+											</div>
+		
+											<div class="modal-footer">
+												<button type="button" class="btn btn-dark">Send Email</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</form>
+		
+						</div>
 					</div>
-				</div>
 			</nav>
-
-			<!--Company image-->
-			<div class="company-image">
-				<img src="{% static 'images/Cpmpany-1200x400.jpeg' %}" class="img-fluid" alt="Deadly Science"
-					title="Welcome to Deadly Science">
-			</div>
-		</header>
 
 		<!--Content-->
 		<main>
@@ -146,40 +218,40 @@
 			<!--Browse button-->
 
 			<div id="container">
-				<a href={% url 'home'%}><button class="btn btn-dark">Browse More Scientists</button></a>
+				<a href="{% url 'home' %}"><button class="btn btn-dark">Browse More Scientists</button></a>
 			</div>
 
-			 <table class="table table-bordered">
-                <h1>Current Appointment</h1>
-                <thead>
-                    <tr>
-                      <th scope="col">Scientist</th>
-                      <th scope="col">Date</th>
-                      <th scope="col">Start Time</th>
-                      <th scope="col">Duration</th>
-                      <th scope="col">Method</th>
-                      <th scope="col">Location/ID</th>
-                        <th scope="col">Status</th>
-                    </tr>
-                </thead>
+			<table class="table table-bordered">
+				<h1>Current Appointment</h1>
+				<thead>
+					<tr>
+						<th scope="col">Scientist</th>
+						<th scope="col">Date</th>
+						<th scope="col">Start Time</th>
+						<th scope="col">Duration</th>
+						<th scope="col">Method</th>
+						<th scope="col">Location/ID</th>
+						<th scope="col">Status</th>
+					</tr>
+				</thead>
 
-                <tbody>
-                 {% for i in current %}
-                    <tr>
+				<tbody>
+					{% for i in current %}
+					<tr>
 
-                        <td>{{ i.scientist_firstname }} {{ i.scientist_lastname }}</td>
-                        <td>{{ i.date }}</td>
-                        <td>{{ i.starttime }}</td>
-                        <td>{{ i.duration }}</td>
-                        <td>{{ i.method }}</td>
-                        <td>{{ i.location_id }}</td>
-                        <td>{{ i.status }}</td>
+						<td>{{ i.scientist_firstname }} {{ i.scientist_lastname }}</td>
+						<td>{{ i.date }}</td>
+						<td>{{ i.starttime }}</td>
+						<td>{{ i.duration }}</td>
+						<td>{{ i.method }}</td>
+						<td>{{ i.location_id }}</td>
+						<td>{{ i.status }}</td>
 
-                    </tr>
-                  {% endfor %}
+					</tr>
+					{% endfor %}
 
-                    </tbody>
-                  </table>
+				</tbody>
+			</table>
 
 		</main>
 

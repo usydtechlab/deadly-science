@@ -34,13 +34,13 @@ def index(request):
         unread_message = unread_message1.filter(student_message_status='unread')
         print(unread_message)
         print(request.session['user_id'])
-        return render(request, 'pages/index_copy.html', {'unread_message': unread_message,'img': img})
+        return render(request, 'pages/index.html', {'unread_message': unread_message,'img': img})
     else:
         img = models.User.objects.filter(role='teacher')
-        return render(request, 'pages/index_copy.html', {'img': img})
+        return render(request, 'pages/index.html', {'img': img})
 
 def index_home(request):
-    return render(request, 'pages/index_copy.html')
+    return render(request, 'pages/index.html')
 
 def index_manageapp_current(request):
 
@@ -643,4 +643,4 @@ def search(request):
         if inputOrganization != "Choose Organization":
             current_search = current_search.filter(organization=inputOrganization)
 
-    return render(request, 'pages/index_copy.html', locals())
+    return render(request, 'pages/index.html', locals())
