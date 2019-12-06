@@ -136,3 +136,7 @@ EMAIL_PORT = 25
 EMAIL_HOST_USER = '18877331313@163.com'
 EMAIL_HOST_PASSWORD = 'w2l8d3'
 CONFIRM_DAYS = 7
+
+HOST_DOMAIN = "localhost"
+AWS_SES_REGION = "us-east-1"
+AWS_SES_SENDER = "techlab@sydney.edu.au"

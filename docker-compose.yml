@@ -1,4 +1,4 @@
-version: '3.2'
+version: "3.2"
 
 services:
   db:
@@ -10,20 +10,21 @@ services:
       - MYSQL_USER=5703
       - MYSQL_PASSWORD=w2l8d3
     ports:
-      - '3306:3306' # Opens port 3306 on the container
+      - "3306:3306" # Opens port 3306 on the container
     expose:
-      - '3306'
+      - "3306"
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
       - deadlysci-db:/var/lib/mysql
     container_name: deadlysci-db
   web:
-    build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    build:
+      context: .
+      dockerfile: Dockerfile
     volumes:
-      - .:/code
+      - ".:/app"
     ports:
-      - "80:8000"  # map to HTTP 80
+      - "80:8000" # map to HTTP 80
     depends_on:
       - db
     container_name: deadlysci-web

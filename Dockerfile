@@ -12,7 +12,11 @@ WORKDIR /app
 
 # Install requirements
 COPY requirements.txt /app/
+COPY aws_config.sh /app/
 RUN pip install  --no-cache-dir -r requirements.txt
+RUN sh aws_config.sh
 
 # copy whole project to work dir
 COPY . /app/
+
+ENTRYPOINT [ "python", "manage.py", "runserver", "0.0.0.0:8000" ]

@@ -13,6 +13,9 @@ from django.conf import settings
 from django.db.models import Q
 from django.utils import timezone
 
+import boto3
+from botocore.exceptions import ClientError
+
 
 # Create your views here.
 
@@ -399,7 +402,7 @@ def make_confirm_string(user):
     return code
 
 
-def send_email(email, code):
+def send_email_obsolete(email, code):
     from django.core.mail import EmailMultiAlternatives
 
     subject = 'Registration confirmation email from Deadly Science/'
@@ -416,6 +419,62 @@ def send_email(email, code):
     msg = EmailMultiAlternatives(subject, text_content, settings.EMAIL_HOST_USER, [email])
     msg.attach_alternative(html_content, "text/html")
     msg.send()
+
+
+def send_email(recipient, code):
+    # The subject line for the email.
+    SUBJECT = "Registration confirmation Email from Deadly Science"
+
+    # The email body for recipients with non-HTML email clients.
+    BODY_TEXT = ("Thanks for registering Deadly Science!")
+
+    # The HTML body of the email.
+    BODY_HTML = '''
+                <p>Thanks for registering <a href="http://{}/confirm/?code={}" target=blank>Deadly Science</a>，\
+                </p>
+                <p>Please click on the site link to complete the registration confirmation.</p>
+                <p>This link is valid for {} days！</p>
+                '''.format(settings.HOST_DOMAIN, code, settings.CONFIRM_DAYS)
+
+    # The character encoding for the email.
+    CHARSET = "UTF-8"
+
+    # Create a new SES resource and specify a region.
+    client = boto3.client('ses', region_name=settings.AWS_SES_REGION)
+
+    # Try to send the email.
+    try:
+        #Provide the contents of the email.
+        response = client.send_email(
+            Destination={
+                'ToAddresses': [
+                    recipient,
+                ],
+            },
+            Message={
+                'Body': {
+                    'Html': {
+                        'Charset': CHARSET,
+                        'Data': BODY_HTML,
+                    },
+                    'Text': {
+                        'Charset': CHARSET,
+                        'Data': BODY_TEXT,
+                    },
+                },
+                'Subject': {
+                    'Charset': CHARSET,
+                    'Data': SUBJECT,
+                },
+            },
+            Source=settings.AWS_SES_SENDER,
+        )
+    # Display an error if something goes wrong.	
+    except ClientError as e:
+        print(e.response['Error']['Message'])
+    else:
+        print("Email sent! Message ID:"),
+        print(response['MessageId'])
 
 
 
