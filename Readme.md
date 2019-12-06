@@ -41,7 +41,9 @@ The majority functions is shown in figure above.
 - [x] Archive original docs from Capstone team CP42-3
 - [x] Collect all the dependencies into `requirements.txt`
 - [x] Implement containerisation
-- [ ] Test app running in Docker container
+- [x] Test app running in Docker container
+- [x] Change to use AWS SES for sending Email notifications
+- [ ] Test student/teacher - Sign up, Sign in, Email verification, Forget Password
 
 
 
