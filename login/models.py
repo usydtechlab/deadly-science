@@ -60,7 +60,7 @@ class User(models.Model):
     firstname = models.CharField(max_length=128, default="null")
     lastname = models.CharField(max_length=128, default="null")
     # image = models.ImageField(max_length=1000,upload_to='image/', null=True, blank=True)
-    img = models.ImageField(upload_to='img',null=True, blank=True ,default="img/ROBERT BOAKES.jepg")
+    img = models.ImageField(upload_to='img',null=True, blank=True ,default="img/usyd_grad.jpeg")
     gender = models.CharField(max_length=32, choices=Gender, default="male")
     organization = models.CharField(max_length=128, default="null")
     title = models.CharField(max_length=32, choices=Title, default="null")

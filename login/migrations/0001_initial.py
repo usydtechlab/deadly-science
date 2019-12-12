@@ -24,7 +24,7 @@ class Migration(migrations.Migration):
                 ('has_confirmed', models.BooleanField(default=False)),
                 ('firstname', models.CharField(default='null', max_length=128)),
                 ('lastname', models.CharField(default='null', max_length=128)),
-                ('img', models.ImageField(blank=True, default='img/ROBERT BOAKES.jepg', null=True, upload_to='img')),
+                ('img', models.ImageField(blank=True, default='img/usyd_grad.jpeg', null=True, upload_to='img')),
                 ('gender', models.CharField(choices=[('male', 'Male'), ('female', 'Female'), ('none', 'None')], default='male', max_length=32)),
                 ('organization', models.CharField(default='null', max_length=128)),
                 ('title', models.CharField(choices=[('assistant', 'Assistant'), ('associate professor', 'Associate Professor'), ('dr', 'Dr'), ('lecturer', 'Lecturer'), ('management', 'Management'), ('phd', 'Phd'), ('postdoc', 'Postdoc'), ('professor', 'Professor'), ('research assistant', 'Research Assistant'), ('researcher', 'Researcher')], default='null', max_length=32)),
